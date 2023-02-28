@@ -5,7 +5,6 @@ namespace CadastroClientes.Controllers;
 [ApiController]
 public class Cliente : ControllerBase
 {
-	// GET: api/<Cliente>
 	[HttpGet]
 	public IEnumerable<Entities.Cliente> Get()
 	{
@@ -19,13 +18,12 @@ public class Cliente : ControllerBase
 		}
 	}
 
-	// GET api/<Cliente>/5
 	[HttpGet("{id}")]
 	public Entities.Cliente Get(int id)
 	{
 		try
 		{
-			return new Services.Cliente().ListaClientes().Where(x => x.Id == id).FirstOrDefault();
+			return new Services.Cliente().PesquisaCliente(id);
 		}
 		catch (Exception)
 		{
@@ -47,7 +45,8 @@ public class Cliente : ControllerBase
 
 	// DELETE api/<Cliente>/5
 	[HttpDelete("{id}")]
-	public void Delete(int id)
+	public List<Entities.Cliente> Delete(int id)
 	{
+		return new Services.Cliente().DeletaCliente(id);
 	}
 }
