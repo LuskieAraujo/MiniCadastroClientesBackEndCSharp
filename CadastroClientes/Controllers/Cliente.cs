@@ -9,14 +9,28 @@ public class Cliente : ControllerBase
 	[HttpGet]
 	public IEnumerable<Entities.Cliente> Get()
 	{
-		return new Services.Cliente().ListaClientes();
+		try
+		{
+			return new Services.Cliente().ListaClientes();
+		}
+		catch (Exception)
+		{
+			return new List<Entities.Cliente>();
+		}
 	}
 
 	// GET api/<Cliente>/5
 	[HttpGet("{id}")]
 	public Entities.Cliente Get(int id)
 	{
-		return new Services.Cliente().ListaClientes().Where(x => x.Id == id).FirstOrDefault();
+		try
+		{
+			return new Services.Cliente().ListaClientes().Where(x => x.Id == id).FirstOrDefault();
+		}
+		catch (Exception)
+		{
+			return new Entities.Cliente();
+		}
 	}
 
 	// POST api/<Cliente>
