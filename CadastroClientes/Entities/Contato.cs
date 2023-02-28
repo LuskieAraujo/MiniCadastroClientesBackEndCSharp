@@ -1,4 +1,4 @@
-﻿namespace CadastroCliente.Entities;
+﻿namespace CadastroClientes.Entities;
 public class Contato
 {
 	public int Id { get; set; }
