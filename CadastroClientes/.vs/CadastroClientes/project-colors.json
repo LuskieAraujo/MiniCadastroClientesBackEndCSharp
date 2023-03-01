@@ -1,5 +1,11 @@
 {
   "Version": 1,
-  "ProjectMap": {},
-  "NextColorIndex": 0
+  "ProjectMap": {
+    "50a47f1a-1751-4af6-9023-06b6e810b8f6": {
+      "ProjectGuid": "50a47f1a-1751-4af6-9023-06b6e810b8f6",
+      "DisplayName": "CadastroClientes",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
 }

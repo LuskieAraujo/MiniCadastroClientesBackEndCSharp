@@ -33,14 +33,16 @@ public class Cliente : ControllerBase
 
 	// POST api/<Cliente>
 	[HttpPost]
-	public void Post([FromBody] string value)
+	public void Post([FromBody] Entities.Cliente novoCliente)
 	{
+
 	}
 
 	// PUT api/<Cliente>/5
 	[HttpPut("{id}")]
-	public void Put(int id, [FromBody] string value)
+	public Entities.Cliente Put(int id, [FromBody] Entities.Cliente cliente)
 	{
+		return new Services.Cliente().AlteraCliente(id, cliente);
 	}
 
 	// DELETE api/<Cliente>/5
