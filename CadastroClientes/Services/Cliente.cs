@@ -3,28 +3,51 @@
 namespace CadastroClientes.Services;
 public class Cliente
 {
-	public List<Entities.Cliente> ListaClientes()
+	public List<Entities.Cliente> Listar()
 	{
-		return new ClienteRepository().ListarClientes();
+		try
+		{
+			return new ClienteRepository().Lista();
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 
-	public Entities.Cliente PesquisaCliente(int id)
+	public Entities.Cliente Pesquisar(int id)
 	{
-		return new ClienteRepository().ListarClientes().Where(x => x.Id == id).FirstOrDefault();
+		try
+		{
+			return new ClienteRepository().Pesquisa(id);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 
-	public Entities.Cliente AlteraCliente(int id, Entities.Cliente dadosNovos)
+	public bool? Salvar(int id, Entities.Cliente dadosNovos)
 	{
-
-		return dadosNovos;
+		try
+		{
+			return id > 0 ? new ClienteRepository().Altera(id, dadosNovos) : new ClienteRepository().Insere(dadosNovos);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 
-	public List<Entities.Cliente> DeletaCliente(int id)
+	public bool? Deletar(int id)
 	{
-		List<Entities.Cliente> clientes = new List<Entities.Cliente>();
-		clientes = new ClienteRepository().ListarClientes().Where(x => x.Id != id).ToList();
-		//clientes.Remove(clientes.Where(x => x.Id == id).First());
-
-		return clientes;
+		try
+		{
+			return new ClienteRepository().Deleta(id);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 }

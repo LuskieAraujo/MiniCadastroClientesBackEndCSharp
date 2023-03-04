@@ -6,49 +6,72 @@ namespace CadastroClientes.Controllers;
 public class Cliente : ControllerBase
 {
 	[HttpGet]
-	public IEnumerable<Entities.Cliente> Get()
+	public ActionResult<List<Entities.Cliente>> Get()
 	{
 		try
 		{
-			return new Services.Cliente().ListaClientes();
+			return Ok(new Services.Cliente().Listar());
 		}
 		catch (Exception)
 		{
-			return new List<Entities.Cliente>();
+			return BadRequest();
 		}
 	}
 
 	[HttpGet("{id}")]
-	public Entities.Cliente Get(int id)
+	public ActionResult<Entities.Cliente> Get(int id)
 	{
 		try
 		{
-			return new Services.Cliente().PesquisaCliente(id);
+			return Ok(new Services.Cliente().Pesquisar(id));
 		}
 		catch (Exception)
 		{
-			return new Entities.Cliente();
+			return BadRequest();
 		}
 	}
 
 	// POST api/<Cliente>
 	[HttpPost]
-	public void Post([FromBody] Entities.Cliente novoCliente)
+	public ActionResult Post([FromBody] Entities.Cliente novoCliente)
 	{
-
+		try
+		{
+			return Ok(new Services.Cliente().Salvar(novoCliente.Id, novoCliente));
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
 	}
 
 	// PUT api/<Cliente>/5
 	[HttpPut("{id}")]
-	public Entities.Cliente Put(int id, [FromBody] Entities.Cliente cliente)
+	public ActionResult<bool> Put(int id, [FromBody] Entities.Cliente cliente)
 	{
-		return new Services.Cliente().AlteraCliente(id, cliente);
+		try
+		{
+			bool? result = new Services.Cliente().Salvar(id, cliente);
+			return result.Value ? Ok() : NoContent();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
 	}
 
 	// DELETE api/<Cliente>/5
 	[HttpDelete("{id}")]
-	public List<Entities.Cliente> Delete(int id)
+	public ActionResult<List<Entities.Cliente>> Delete(int id)
 	{
-		return new Services.Cliente().DeletaCliente(id);
+		try
+		{
+			bool? result = new Services.Cliente().Deletar(id);
+			return result.Value ? Ok() : NoContent();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
 	}
 }
