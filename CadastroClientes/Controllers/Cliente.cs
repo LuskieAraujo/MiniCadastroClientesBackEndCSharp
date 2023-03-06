@@ -31,7 +31,6 @@ public class Cliente : ControllerBase
 		}
 	}
 
-	// POST api/<Cliente>
 	[HttpPost]
 	public ActionResult Post([FromBody] Entities.Cliente novoCliente)
 	{
@@ -45,7 +44,6 @@ public class Cliente : ControllerBase
 		}
 	}
 
-	// PUT api/<Cliente>/5
 	[HttpPut("{id}")]
 	public ActionResult<bool> Put(int id, [FromBody] Entities.Cliente cliente)
 	{
@@ -60,7 +58,34 @@ public class Cliente : ControllerBase
 		}
 	}
 
-	// DELETE api/<Cliente>/5
+	[HttpPut("{id}/c/{id}")]
+	public ActionResult<bool> PutContact(int id, [FromBody] Entities.Cliente cliente)
+	{
+		try
+		{
+			bool? result = new Services.Cliente().Salvar(id, cliente);
+			return result.Value ? Ok() : NoContent();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
+	}
+
+	[HttpPut("{id}/e/{id}")]
+	public ActionResult<bool> PutAddress(int id, [FromBody] Entities.Cliente cliente)
+	{
+		try
+		{
+			bool? result = new Services.Cliente().Salvar(id, cliente);
+			return result.Value ? Ok() : NoContent();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
+	}
+
 	[HttpDelete("{id}")]
 	public ActionResult<List<Entities.Cliente>> Delete(int id)
 	{
@@ -68,6 +93,32 @@ public class Cliente : ControllerBase
 		{
 			bool? result = new Services.Cliente().Deletar(id);
 			return result.Value ? Ok() : NoContent();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
+	}
+
+	[HttpDelete("{id}/c/{id}")]
+	public ActionResult<bool> DeleteContact(int id, int contato)
+	{
+		try
+		{
+			return Ok();
+		}
+		catch (Exception)
+		{
+			return BadRequest();
+		}
+	}
+
+	[HttpDelete("{id}/e/{id}")]
+	public ActionResult<bool> DeleteAddress(int id, int contato)
+	{
+		try
+		{
+			return Ok();
 		}
 		catch (Exception)
 		{

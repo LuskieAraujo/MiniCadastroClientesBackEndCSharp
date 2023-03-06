@@ -31,7 +31,21 @@ public class Cliente
 	{
 		try
 		{
-			return id > 0 ? new ClienteRepository().Altera(id, dadosNovos) : new ClienteRepository().Insere(dadosNovos);
+			return id > 0
+				? new ClienteRepository().Altera(id, dadosNovos)
+				: new ClienteRepository().Insere(dadosNovos);
+		}
+		catch (Exception)
+		{
+			return null;
+		}
+	}
+
+	public bool? SalvarContato(int id, Entities.Contato contato)
+	{
+		try
+		{
+
 		}
 		catch (Exception)
 		{
